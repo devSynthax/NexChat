@@ -1,0 +1,29 @@
+{
+  "name": "nexchat",
+  "version": "1.0.0",
+  "description": "NexChat – A fast, secure, and modern chat app for real-time conversations anytime, anywhere",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Karthik",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.1",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "http-status-codes": "^2.3.0",
+    "mongoose": "^8.16.3",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-jwt": "^4.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10"
+  }
+}
