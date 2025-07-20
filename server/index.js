@@ -8,10 +8,14 @@ const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const session = require('express-session');
-const passport = require('passport');
+const passport = require('./src/config/passport')
 const DBConfig = require('./src/config/dbConfig');
+const authRouter = require('./src/routes/auth.route')
 
 const app = express();
+
+// Connect to MongoDB
+DBConfig.connectMongoDb(process.env.MONGO_URI);
 
 // Setup request logging to access.log file
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
@@ -52,7 +56,7 @@ app.get('/', (req, res) => {
 });
 
 // Create API End Point
-app.use('/api/v1/', require('./src/routes/web.route'));
+app.use('/api/v1/', authRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -60,11 +64,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// Connect to MongoDB
-DBConfig.connectMongoDb(process.env.MONGO_CONNECTION);
-
 // Start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
